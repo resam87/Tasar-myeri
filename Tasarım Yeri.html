@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasarım Yeri | Modern & Minimalist Web Tasarım</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: {
+                            900: '#0a0a0a',
+                            800: '#121212',
+                            700: '#1e1e1e',
+                        },
+                        accent: {
+                            500: '#8b5cf6', 
+                            600: '#7c3aed',
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a2a2a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3a3a3a;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        body {
+            background-color: #0a0a0a;
+            color: #e5e5e5;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-accent-500 selection:text-white">
+
+    <!-- Üst Menü -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 backdrop-blur-md bg-dark-900/80 border-b border-white/5" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 py-4 flex justify-between items-center">
+            
+            <a href="#" class="text-2xl font-bold tracking-tight text-white flex items-center gap-2 group">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-accent-500 to-fuchsia-600 flex items-center justify-center transition-transform group-hover:rotate-12">
+                    <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                    </svg>
+                </div>
+                Tasarım <span class="text-white/50 font-light">Yeri</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-6 lg:space-x-8 text-sm font-medium text-gray-400">
+                <a href="#baslangic" id="tr-nav-1" class="hover:text-white transition-colors duration-300">Başlangıç</a>
+                <a href="#hizmetler" id="tr-nav-2" class="hover:text-white transition-colors duration-300">Hizmetler</a>
+                <a href="#neden-biz" id="tr-nav-3" class="hover:text-white transition-colors duration-300">Neden Biz?</a>
+                <a href="#surec" id="tr-nav-4" class="hover:text-white transition-colors duration-300">Sürecimiz</a>
+                <a href="#vizyon" id="tr-nav-5" class="hover:text-white transition-colors duration-300">Vizyonumuz</a>
+            </div>
+
+            <div class="hidden md:flex items-center gap-6">
+                
+                <!-- Dil Seçici -->
+                <div class="relative group cursor-pointer">
+                    <div class="flex items-center gap-1.5 text-sm font-medium text-gray-400 hover:text-white transition-colors duration-300 py-2">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span id="activeLang">TR</span>
+                        <svg class="w-3 h-3 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </div>
+                    <div class="absolute top-full right-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                        <div class="w-28 bg-dark-800 border border-white/10 rounded-xl shadow-2xl overflow-hidden flex flex-col p-1">
+                            <button onclick="changeLanguage('TR')" id="btn-tr" class="text-left px-4 py-2 text-sm font-medium text-white bg-white/5 rounded-lg transition-colors">Türkçe</button>
+                            <button onclick="changeLanguage('EN')" id="btn-en" class="text-left px-4 py-2 text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors mt-1">English</button>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#iletisim" id="tr-btn-contact" class="inline-flex items-center justify-center px-5 py-2 text-sm font-medium text-white bg-white/10 rounded-full hover:bg-white/20 transition-all duration-300 hover:shadow-[0_0_15px_rgba(139,92,246,0.3)]">
+                    İletişime Geç
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Bölümü -->
+    <section id="baslangic" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-accent-500/20 rounded-full mix-blend-screen filter blur-[128px] animate-blob z-0"></div>
+        <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-fuchsia-500/20 rounded-full mix-blend-screen filter blur-[128px] animate-blob animation-delay-2000 z-0"></div>
+        <div class="absolute -bottom-32 left-1/2 w-96 h-96 bg-blue-500/20 rounded-full mix-blend-screen filter blur-[128px] animate-blob animation-delay-4000 z-0"></div>
+
+        <div class="relative z-10 max-w-4xl mx-auto px-6 text-center reveal">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400 mb-6 backdrop-blur-sm">
+                <span class="w-2 h-2 rounded-full bg-accent-500 animate-pulse"></span>
+                <span id="tr-hero-badge">Yeni Nesil Web Tasarım Ajansı</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight leading-tight">
+                <span id="tr-hero-title1">Dijital Varlığınızı</span> <br>
+                <span id="tr-hero-title2" class="text-transparent bg-clip-text bg-gradient-to-r from-accent-500 to-fuchsia-500">
+                    Sanata Dönüştürün.
+                </span>
+            </h1>
+            
+            <p id="tr-hero-desc" class="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+                Göz yormayan, minimalist ve tamamen akışkan web deneyimleri inşa ediyoruz. Sadece bir web sitesi değil, markanızın dijital dünyadaki kusursuz yansımasını tasarlıyoruz.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#hizmetler" class="w-full sm:w-auto px-8 py-4 bg-white text-black rounded-full font-medium hover:bg-gray-200 transition-colors duration-300 flex items-center justify-center gap-2">
+                    <span id="tr-hero-btn1-text">Neler Yapıyoruz?</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                </a>
+                <button onclick="openModal()" id="tr-hero-btn2" class="w-full sm:w-auto px-8 py-4 bg-white/5 text-white border border-white/10 rounded-full font-medium hover:bg-white/10 transition-colors duration-300">
+                    Projeyi Konuşalım
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hizmetlerimiz -->
+    <section id="hizmetler" class="py-32 relative bg-dark-800/30 border-t border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-20 reveal">
+                <h2 id="tr-serv-badge" class="text-sm font-semibold text-fuchsia-500 tracking-wider uppercase mb-3">Uzmanlık Alanlarımız</h2>
+                <h3 id="tr-serv-title" class="text-3xl md:text-4xl font-bold text-white">Size Nasıl Yardımcı Olabiliriz?</h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Hizmet 1 -->
+                <div class="group p-8 rounded-3xl bg-dark-900 border border-white/5 hover:-translate-y-2 transition-all duration-500 reveal delay-100">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent-500/20 to-fuchsia-500/20 border border-white/10 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+                        <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h4 id="tr-serv-1-t" class="text-2xl font-semibold text-white mb-4">Kurumsal Web Siteleri</h4>
+                    <p id="tr-serv-1-d" class="text-gray-400 leading-relaxed font-light">
+                        Şirketinizin prestijini yansıtan, mobil uyumlu ve modern tasarımlar. Müşterilerinize güven veren, kurumsal kimliğinizle bütünleşen hızlı sayfalar tasarlıyoruz.
+                    </p>
+                </div>
+                <!-- Hizmet 2 -->
+                <div class="group p-8 rounded-3xl bg-dark-900 border border-white/5 hover:-translate-y-2 transition-all duration-500 reveal delay-200">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-white/10 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+                        <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h4 id="tr-serv-2-t" class="text-2xl font-semibold text-white mb-4">Etkileyici Landing Page</h4>
+                    <p id="tr-serv-2-d" class="text-gray-400 leading-relaxed font-light">
+                        Kampanyalarınız, yeni fikirleriniz veya ürünleriniz için ziyaretçiyi doğrudan aksiyona geçiren (hemen dönüşüm odaklı), hızlı ve çarpıcı tek sayfalık web tasarımları.
+                    </p>
+                </div>
+                <!-- Hizmet 3 -->
+                <div class="group p-8 rounded-3xl bg-dark-900 border border-white/5 hover:-translate-y-2 transition-all duration-500 reveal delay-300">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500/20 to-pink-500/20 border border-white/10 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+                        <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                    </div>
+                    <h4 id="tr-serv-3-t" class="text-2xl font-semibold text-white mb-4">Özel Web Projeleri & Portfolyo</h4>
+                    <p id="tr-serv-3-d" class="text-gray-400 leading-relaxed font-light">
+                        Freelancerlar için dijital kartvizitler, kişisel markanızı yansıtan portfolyolar veya fikrinize özel kodlanmış, bol animasyonlu modern web deneyimleri.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Neden Biz? -->
+    <section id="neden-biz" class="py-32 relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-20 reveal">
+                <h2 id="tr-why-badge" class="text-sm font-semibold text-accent-500 tracking-wider uppercase mb-3">İşimizin Özü</h2>
+                <h3 id="tr-why-title" class="text-3xl md:text-4xl font-bold text-white">Neden Bizi Tercih Etmelisiniz?</h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Kart 1 -->
+                <div class="group p-8 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] hover:border-white/10 transition-all duration-500 reveal delay-100">
+                    <div class="w-14 h-14 rounded-xl bg-accent-500/10 text-accent-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                        <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                    </div>
+                    <h4 id="tr-why-1-t" class="text-xl font-semibold text-white mb-3">%100 Müşteri Memnuniyeti</h4>
+                    <p id="tr-why-1-d" class="text-gray-400 leading-relaxed font-light text-sm">
+                        Bizim için proje teslim edildiğinde bitmez; siz "işte tam olarak bu!" diyene kadar çalışırız. İhtiyaçlarınızı dinliyor, markanızı benimsiyor ve beklentilerinizin ötesinde bir dijital varlık sunuyoruz.
+                    </p>
+                </div>
+                <!-- Kart 2 -->
+                <div class="group p-8 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] hover:border-white/10 transition-all duration-500 reveal delay-200">
+                    <div class="w-14 h-14 rounded-xl bg-fuchsia-500/10 text-fuchsia-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                        <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                        </svg>
+                    </div>
+                    <h4 id="tr-why-2-t" class="text-xl font-semibold text-white mb-3">Minimalist Yaklaşım</h4>
+                    <p id="tr-why-2-d" class="text-gray-400 leading-relaxed font-light text-sm">
+                        Kullanıcının dikkatini dağıtan gereksiz detaylardan arındırılmış, doğrudan amaca hizmet eden arayüzler. Karanlık temanın zarafetiyle, ziyaretçilerinizin gözünü yormadan içeriğinizi ön plana çıkarıyoruz.
+                    </p>
+                </div>
+                <!-- Kart 3 -->
+                <div class="group p-8 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] hover:border-white/10 transition-all duration-500 reveal delay-300">
+                    <div class="w-14 h-14 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                        <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h4 id="tr-why-3-t" class="text-xl font-semibold text-white mb-3">Akışkan ve Hızlı</h4>
+                    <p id="tr-why-3-d" class="text-gray-400 leading-relaxed font-light text-sm">
+                        Modern web standartlarında yazılmış, pürüzsüz animasyonlarla zenginleştirilmiş sayfalar. Sitenizde gezinmek bir işlemden çok, su gibi akan keyifli bir deneyim haline gelir.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sürecimiz -->
+    <section id="surec" class="py-32 relative bg-dark-800/30 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-20 reveal">
+                <h2 id="tr-proc-badge" class="text-sm font-semibold text-blue-500 tracking-wider uppercase mb-3">Adım Adım Başarı</h2>
+                <h3 id="tr-proc-title" class="text-3xl md:text-4xl font-bold text-white">Nasıl Çalışıyoruz?</h3>
+                <p id="tr-proc-desc" class="text-gray-400 mt-4 max-w-2xl mx-auto font-light">Fikrinizin hayata geçme serüveni. Karmaşık süreçleri basitleştiriyor, şeffaf bir iletişimle ilerliyoruz.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Adım 1 -->
+                <div class="relative p-8 rounded-3xl bg-dark-900 border border-white/5 overflow-hidden group reveal delay-100">
+                    <div class="absolute -right-4 -bottom-8 text-9xl font-bold text-white/[0.03] group-hover:text-white/[0.05] transition-colors duration-500 z-0">01</div>
+                    <div class="relative z-10">
+                        <div class="w-12 h-12 rounded-full bg-accent-500/20 text-accent-500 flex items-center justify-center mb-6 font-bold">1</div>
+                        <h4 id="tr-proc-1-t" class="text-xl font-bold text-white mb-3">Keşif & Planlama</h4>
+                        <p id="tr-proc-1-d" class="text-gray-400 text-sm leading-relaxed font-light">Önce sizi bir kahve eşliğinde dinliyor, markanızı, hedeflerinizi ve beklentilerinizi analiz ediyoruz. Doğru temel, sağlam yapı demektir.</p>
+                    </div>
+                </div>
+                <!-- Adım 2 -->
+                <div class="relative p-8 rounded-3xl bg-dark-900 border border-white/5 overflow-hidden group reveal delay-200">
+                    <div class="absolute -right-4 -bottom-8 text-9xl font-bold text-white/[0.03] group-hover:text-white/[0.05] transition-colors duration-500 z-0">02</div>
+                    <div class="relative z-10">
+                        <div class="w-12 h-12 rounded-full bg-fuchsia-500/20 text-fuchsia-500 flex items-center justify-center mb-6 font-bold">2</div>
+                        <h4 id="tr-proc-2-t" class="text-xl font-bold text-white mb-3">UI/UX Tasarım</h4>
+                        <p id="tr-proc-2-d" class="text-gray-400 text-sm leading-relaxed font-light">Taslakları oluşturuyor, modern ve minimalist tasarım dilimizle göz yormayan, markanıza özel arayüzleri piksel piksel çiziyoruz.</p>
+                    </div>
+                </div>
+                <!-- Adım 3 -->
+                <div class="relative p-8 rounded-3xl bg-dark-900 border border-white/5 overflow-hidden group reveal delay-300">
+                    <div class="absolute -right-4 -bottom-8 text-9xl font-bold text-white/[0.03] group-hover:text-white/[0.05] transition-colors duration-500 z-0">03</div>
+                    <div class="relative z-10">
+                        <div class="w-12 h-12 rounded-full bg-blue-500/20 text-blue-500 flex items-center justify-center mb-6 font-bold">3</div>
+                        <h4 id="tr-proc-3-t" class="text-xl font-bold text-white mb-3">Geliştirme</h4>
+                        <p id="tr-proc-3-d" class="text-gray-400 text-sm leading-relaxed font-light">Onaylanan tasarımı, en güncel web teknolojileriyle performansı yüksek ve tamamen akışkan kodlara dönüştürüyoruz.</p>
+                    </div>
+                </div>
+                <!-- Adım 4 -->
+                <div class="relative p-8 rounded-3xl bg-dark-900 border border-white/5 overflow-hidden group reveal delay-500">
+                    <div class="absolute -right-4 -bottom-8 text-9xl font-bold text-white/[0.03] group-hover:text-white/[0.05] transition-colors duration-500 z-0">04</div>
+                    <div class="relative z-10">
+                        <div class="w-12 h-12 rounded-full bg-green-500/20 text-green-500 flex items-center justify-center mb-6 font-bold">4</div>
+                        <h4 id="tr-proc-4-t" class="text-xl font-bold text-white mb-3">Test & Yayın</h4>
+                        <p id="tr-proc-4-d" class="text-gray-400 text-sm leading-relaxed font-light">Tüm cihazlarda (mobil, tablet, PC) kusursuzluk testlerini yapıyor ve sitenizi dünyayla buluşturuyoruz.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vizyon -->
+    <section id="vizyon" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
+            <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-accent-500 to-transparent"></div>
+        </div>
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10 reveal">
+            <svg class="w-12 h-12 mx-auto text-white/20 mb-6" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"></path>
+            </svg>
+            <h2 id="tr-vis-quote" class="text-2xl md:text-4xl font-light text-white leading-relaxed italic">
+                "İyi tasarım sadece nasıl göründüğü değil, <br class="hidden md:block"> 
+                <span class="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-accent-500 to-fuchsia-500">nasıl hissettirdiğiyle</span> de ilgilidir. Sizin için sadece bir site değil, dijital bir deneyim yaratıyoruz."
+            </h2>
+        </div>
+    </section>
+
+    <!-- İletişim -->
+    <section id="iletisim" class="py-32">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="bg-dark-800 rounded-3xl p-10 md:p-16 text-center border border-white/5 relative overflow-hidden reveal">
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-accent-500 to-transparent"></div>
+                
+                <h2 id="tr-contact-title" class="text-3xl md:text-5xl font-bold text-white mb-6">Fikrinizi Hayata Geçirelim</h2>
+                <p id="tr-contact-desc" class="text-gray-400 mb-10 text-lg font-light max-w-xl mx-auto">
+                    Modern, akışkan ve markanızı yansıtan harika bir web sitesine sahip olmak sandığınızdan daha kolay. Hemen iletişime geçin, projenizi konuşalım.
+                </p>
+                
+                <button onclick="openModal()" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 mb-8 text-base font-medium text-white bg-accent-600 rounded-full hover:bg-accent-500 transition-all duration-300 shadow-[0_0_20px_rgba(124,58,237,0.3)] hover:shadow-[0_0_30px_rgba(124,58,237,0.5)] gap-2">
+                    <span id="tr-btn-contact-main">Sizinle İletişime Geçmemiz İçin Tıklayın</span>
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </button>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="https://wa.me/905374207543" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-[#25D366]/20 border border-[#25D366]/50 rounded-full hover:bg-[#25D366]/30 transition-all duration-300 gap-2">
+                        <svg class="w-5 h-5 text-[#25D366]" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                        <span id="tr-wa-text">WhatsApp</span>
+                    </a>
+                    
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=seyedhuseyin@gmail.com" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-white/5 border border-white/10 rounded-full hover:bg-white/10 transition-all duration-300 gap-2">
+                        <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        <span id="tr-email-text">E-Posta</span>
+                    </a>
+
+                    <a href="javascript:void(0)" onclick="copyToClipboard(event, '05374207543')" class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-white/5 border border-white/10 rounded-full hover:bg-white/10 transition-all duration-300 gap-2 cursor-pointer">
+                        <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        </svg>
+                        <span id="phoneText" class="transition-colors duration-300">0537 420 75 43</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Form -->
+    <div id="contactModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300 bg-black/80 backdrop-blur-sm">
+        <div class="bg-dark-900 border border-white/10 rounded-2xl w-full max-w-md p-6 relative transform scale-95 transition-transform duration-300" id="modalContent">
+            
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <h3 id="tr-modal-title" class="text-2xl font-bold text-white mb-2">Sizi Arayalım</h3>
+            <p id="tr-modal-desc" class="text-gray-400 text-sm mb-6">İletişim bilgilerinizi bırakın, projenizi konuşmak için sizi en kısa sürede arayalım.</p>
+
+            <form id="appointmentForm" class="space-y-4" onsubmit="submitForm(event)">
+                <div>
+                    <label id="tr-label-name" class="block text-sm font-medium text-gray-300 mb-1">Adınız Soyadınız</label>
+                    <input id="tr-input-name" type="text" required class="w-full bg-dark-800 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500 transition-all placeholder-gray-600" placeholder="Örn: Ahmet Yılmaz">
+                </div>
+                <div>
+                    <label id="tr-label-phone" class="block text-sm font-medium text-gray-300 mb-1">Telefon Numaranız</label>
+                    <input id="tr-input-phone" type="tel" required class="w-full bg-dark-800 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500 transition-all placeholder-gray-600" placeholder="05XX XXX XX XX">
+                </div>
+                <div>
+                    <label id="tr-label-msg" class="block text-sm font-medium text-gray-300 mb-1">Kısaca Projeniz (Opsiyonel)</label>
+                    <textarea id="tr-input-msg" rows="3" class="w-full bg-dark-800 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500 transition-all placeholder-gray-600 resize-none" placeholder="Nasıl bir web sitesi hayal ediyorsunuz?"></textarea>
+                </div>
+                
+                <button type="submit" id="submitBtn" class="w-full bg-accent-600 hover:bg-accent-500 text-white font-medium py-3 rounded-xl transition-colors duration-300 flex justify-center items-center gap-2">
+                    <span id="tr-modal-btn-text">Gönder ve Aranma İste</span>
+                    <svg id="spinner" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                </button>
+            </form>
+
+            <div id="successMessage" class="hidden text-center py-6">
+                <div class="w-16 h-16 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <h4 id="tr-success-title" class="text-xl font-bold text-white mb-2">Talebiniz Alındı!</h4>
+                <p id="tr-success-desc" class="text-gray-400 text-sm">Bilgileriniz başarıyla sisteme düştü. (Canlı yayına geçildiğinde size "Müşteri Arandı" SMS'i gelecektir). En kısa sürede geri dönüş yapacağız.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 py-10 bg-dark-900">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6 rounded bg-gradient-to-br from-accent-500 to-fuchsia-600 flex items-center justify-center">
+                    <svg class="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                    </svg>
+                </div>
+                <span class="text-white font-semibold text-lg">Tasarım <span class="text-white/50 font-light">Yeri</span></span>
+            </div>
+            
+            <p id="tr-footer-text" class="text-gray-500 text-sm font-light">
+                &copy; 2026 Tasarım Yeri. Tüm hakları saklıdır. Modern & Minimalist Yaklaşım.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+            const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+
+            const revealOnScroll = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, revealOptions);
+
+            reveals.forEach(reveal => { revealOnScroll.observe(reveal); });
+
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('py-2', 'bg-dark-900/90');
+                    navbar.classList.remove('py-4', 'bg-dark-900/80');
+                } else {
+                    navbar.classList.add('py-4', 'bg-dark-900/80');
+                    navbar.classList.remove('py-2', 'bg-dark-900/90');
+                }
+            });
+        });
+
+        const modal = document.getElementById('contactModal');
+        const modalContent = document.getElementById('modalContent');
+        const form = document.getElementById('appointmentForm');
+        const successMessage = document.getElementById('successMessage');
+        const submitBtn = document.getElementById('submitBtn');
+        const spinner = document.getElementById('spinner');
+
+        function openModal() {
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalContent.classList.remove('scale-95');
+            modalContent.classList.add('scale-100');
+            form.reset();
+            form.classList.remove('hidden');
+            successMessage.classList.add('hidden');
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+        }
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) { closeModal(); }
+        });
+
+        function submitForm(e) {
+            e.preventDefault();
+            const btnText = document.getElementById('tr-modal-btn-text');
+            const currentLang = document.getElementById('activeLang').innerText;
+            btnText.textContent = currentLang === 'TR' ? "Gönderiliyor..." : "Sending...";
+            
+            spinner.classList.remove('hidden');
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+
+            setTimeout(() => {
+                form.classList.add('hidden');
+                successMessage.classList.remove('hidden');
+                
+                btnText.textContent = currentLang === 'TR' ? "Gönder ve Aranma İste" : "Submit & Request a Call";
+                spinner.classList.add('hidden');
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+
+                setTimeout(() => { closeModal(); }, 4000);
+            }, 1500);
+        }
+
+        function copyToClipboard(e, text) {
+            const phoneSpan = document.getElementById('phoneText');
+            const currentLang = document.getElementById('activeLang').innerText;
+            
+            const tempInput = document.createElement("input");
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+
+            const originalText = "0537 420 75 43";
+            phoneSpan.innerText = currentLang === 'TR' ? "Kopyalandı!" : "Copied!";
+            phoneSpan.classList.add('text-green-400', 'font-bold');
+            
+            setTimeout(() => {
+                phoneSpan.innerText = originalText;
+                phoneSpan.classList.remove('text-green-400', 'font-bold');
+            }, 2000);
+        }
+
+        // --- Gelişmiş Tüm Sayfa Çeviri Sistemi ---
+        const translations = {
+            TR: {
+                'tr-nav-1': 'Başlangıç', 'tr-nav-2': 'Hizmetler', 'tr-nav-3': 'Neden Biz?', 'tr-nav-4': 'Sürecimiz', 'tr-nav-5': 'Vizyonumuz',
+                'tr-btn-contact': 'İletişime Geç',
+                'tr-hero-badge': 'Yeni Nesil Web Tasarım Ajansı',
+                'tr-hero-title1': 'Dijital Varlığınızı',
+                'tr-hero-title2': 'Sanata Dönüştürün.',
+                'tr-hero-desc': 'Göz yormayan, minimalist ve tamamen akışkan web deneyimleri inşa ediyoruz. Sadece bir web sitesi değil, markanızın dijital dünyadaki kusursuz yansımasını tasarlıyoruz.',
+                'tr-hero-btn1-text': 'Neler Yapıyoruz?',
+                'tr-hero-btn2': 'Projeyi Konuşalım',
+                'tr-serv-badge': 'Uzmanlık Alanlarımız',
+                'tr-serv-title': 'Size Nasıl Yardımcı Olabiliriz?',
+                'tr-serv-1-t': 'Kurumsal Web Siteleri',
+                'tr-serv-1-d': 'Şirketinizin prestijini yansıtan, mobil uyumlu ve modern tasarımlar. Müşterilerinize güven veren, kurumsal kimliğinizle bütünleşen hızlı sayfalar tasarlıyoruz.',
+                'tr-serv-2-t': 'Etkileyici Landing Page',
+                'tr-serv-2-d': 'Kampanyalarınız, yeni fikirleriniz veya ürünleriniz için ziyaretçiyi doğrudan aksiyona geçiren (hemen dönüşüm odaklı), hızlı ve çarpıcı tek sayfalık web tasarımları.',
+                'tr-serv-3-t': 'Özel Web Projeleri & Portfolyo',
+                'tr-serv-3-d': 'Freelancerlar için dijital kartvizitler, kişisel markanızı yansıtan portfolyolar veya fikrinize özel kodlanmış, bol animasyonlu modern web deneyimleri.',
+                'tr-why-badge': 'İşimizin Özü',
+                'tr-why-title': 'Neden Bizi Tercih Etmelisiniz?',
+                'tr-why-1-t': '%100 Müşteri Memnuniyeti',
+                'tr-why-1-d': 'Bizim için proje teslim edildiğinde bitmez; siz "işte tam olarak bu!" diyene kadar çalışırız. İhtiyaçlarınızı dinliyor, markanızı benimsiyor ve beklentilerinizin ötesinde bir dijital varlık sunuyoruz.',
+                'tr-why-2-t': 'Minimalist Yaklaşım',
+                'tr-why-2-d': 'Kullanıcının dikkatini dağıtan gereksiz detaylardan arındırılmış, doğrudan amaca hizmet eden arayüzler. Karanlık temanın zarafetiyle, ziyaretçilerinizin gözünü yormadan içeriğinizi ön plana çıkarıyoruz.',
+                'tr-why-3-t': 'Akışkan ve Hızlı',
+                'tr-why-3-d': 'Modern web standartlarında yazılmış, pürüzsüz animasyonlarla zenginleştirilmiş sayfalar. Sitenizde gezinmek bir işlemden çok, su gibi akan keyifli bir deneyim haline gelir.',
+                'tr-proc-badge': 'Adım Adım Başarı',
+                'tr-proc-title': 'Nasıl Çalışıyoruz?',
+                'tr-proc-desc': 'Fikrinizin hayata geçme serüveni. Karmaşık süreçleri basitleştiriyor, şeffaf bir iletişimle ilerliyoruz.',
+                'tr-proc-1-t': 'Keşif & Planlama',
+                'tr-proc-1-d': 'Önce sizi bir kahve eşliğinde dinliyor, markanızı, hedeflerinizi ve beklentilerinizi analiz ediyoruz. Doğru temel, sağlam yapı demektir.',
+                'tr-proc-2-t': 'UI/UX Tasarım',
+                'tr-proc-2-d': 'Taslakları oluşturuyor, modern ve minimalist tasarım dilimizle göz yormayan, markanıza özel arayüzleri piksel piksel çiziyoruz.',
+                'tr-proc-3-t': 'Geliştirme',
+                'tr-proc-3-d': 'Onaylanan tasarımı, en güncel web teknolojileriyle performansı yüksek ve tamamen akışkan kodlara dönüştürüyoruz.',
+                'tr-proc-4-t': 'Test & Yayın',
+                'tr-proc-4-d': 'Tüm cihazlarda (mobil, tablet, PC) kusursuzluk testlerini yapıyor ve sitenizi dünyayla buluşturuyoruz.',
+                'tr-vis-quote': '"İyi tasarım sadece nasıl göründüğü değil, <br class="hidden md:block"> <span class="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-accent-500 to-fuchsia-500">nasıl hissettirdiğiyle</span> de ilgilidir. Sizin için sadece bir site değil, dijital bir deneyim yaratıyoruz."',
+                'tr-contact-title': 'Fikrinizi Hayata Geçirelim',
+                'tr-contact-desc': 'Modern, akışkan ve markanızı yansıtan harika bir web sitesine sahip olmak sandığınızdan daha kolay. Hemen iletişime geçin, projenizi konuşalım.',
+                'tr-btn-contact-main': 'Sizinle İletişime Geçmemiz İçin Tıklayın',
+                'tr-wa-text': 'WhatsApp',
+                'tr-email-text': 'E-Posta',
+                'tr-modal-title': 'Sizi Arayalım',
+                'tr-modal-desc': 'İletişim bilgilerinizi bırakın, projenizi konuşmak için sizi en kısa sürede arayalım.',
+                'tr-label-name': 'Adınız Soyadınız',
+                'tr-label-phone': 'Telefon Numaranız',
+                'tr-label-msg': 'Kısaca Projeniz (Opsiyonel)',
+                'tr-input-name': 'Örn: Ahmet Yılmaz',
+                'tr-input-phone': '05XX XXX XX XX',
+                'tr-input-msg': 'Nasıl bir web sitesi hayal ediyorsunuz?',
+                'tr-modal-btn-text': 'Gönder ve Aranma İste',
+                'tr-success-title': 'Talebiniz Alındı!',
+                'tr-success-desc': 'Bilgileriniz başarıyla sisteme düştü. (Canlı yayına geçildiğinde size "Müşteri Arandı" SMS\'i gelecektir). En kısa sürede geri dönüş yapacağız.',
+                'tr-footer-text': '&copy; 2026 Tasarım Yeri. Tüm hakları saklıdır. Modern & Minimalist Yaklaşım.'
+            },
+            EN: {
+                'tr-nav-1': 'Home', 'tr-nav-2': 'Services', 'tr-nav-3': 'Why Us?', 'tr-nav-4': 'Process', 'tr-nav-5': 'Vision',
+                'tr-btn-contact': 'Contact Us',
+                'tr-hero-badge': 'Next-Gen Web Design Agency',
+                'tr-hero-title1': 'Transform Your Presence',
+                'tr-hero-title2': 'Into Digital Art.',
+                'tr-hero-desc': 'We build eye-friendly, minimalist, and perfectly fluid web experiences. We don\'t just design websites, we craft your brand\'s flawless reflection in the digital world.',
+                'tr-hero-btn1-text': 'What We Do',
+                'tr-hero-btn2': 'Let\'s Talk',
+                'tr-serv-badge': 'Our Expertise',
+                'tr-serv-title': 'How Can We Help You?',
+                'tr-serv-1-t': 'Corporate Websites',
+                'tr-serv-1-d': 'Mobile-friendly and modern designs reflecting your company\'s prestige. We design fast pages that inspire trust and integrate with your corporate identity.',
+                'tr-serv-2-t': 'Impactful Landing Pages',
+                'tr-serv-2-d': 'Fast and striking single-page web designs that drive visitors directly to action (conversion-focused) for your campaigns, new ideas, or products.',
+                'tr-serv-3-t': 'Custom Web Projects & Portfolio',
+                'tr-serv-3-d': 'Digital business cards for freelancers, portfolios reflecting your personal brand, or custom-coded, animation-rich modern web experiences for your unique idea.',
+                'tr-why-badge': 'Core of Our Work',
+                'tr-why-title': 'Why Choose Us?',
+                'tr-why-1-t': '100% Customer Satisfaction',
+                'tr-why-1-d': 'For us, the project doesn\'t end upon delivery; we work until you say "this is exactly it!". We listen to your needs, embrace your brand, and deliver a digital asset beyond expectations.',
+                'tr-why-2-t': 'Minimalist Approach',
+                'tr-why-2-d': 'Interfaces stripped of unnecessary details that distract the user, serving the purpose directly. With the elegance of the dark theme, we highlight your content without straining the eyes.',
+                'tr-why-3-t': 'Fluid and Fast',
+                'tr-why-3-d': 'Pages written in modern web standards, enriched with smooth animations. Navigating your site becomes a fluid, enjoyable experience rather than a transaction.',
+                'tr-proc-badge': 'Step by Step Success',
+                'tr-proc-title': 'How We Work?',
+                'tr-proc-desc': 'The journey of bringing your idea to life. We simplify complex processes and proceed with transparent communication.',
+                'tr-proc-1-t': 'Discovery & Planning',
+                'tr-proc-1-d': 'First, we listen to you over a coffee, analyzing your brand, goals, and expectations. A proper foundation means a solid structure.',
+                'tr-proc-2-t': 'UI/UX Design',
+                'tr-proc-2-d': 'We create drafts and design eye-friendly, brand-specific interfaces pixel by pixel with our modern and minimalist design language.',
+                'tr-proc-3-t': 'Development',
+                'tr-proc-3-d': 'We transform the approved design into high-performance and completely fluid code using the latest web technologies.',
+                'tr-proc-4-t': 'Testing & Launch',
+                'tr-proc-4-d': 'We run perfection tests on all devices (mobile, tablet, PC) and introduce your site to the world.',
+                'tr-vis-quote': '"Good design is not just what it looks like, but <br class="hidden md:block"> <span class="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-accent-500 to-fuchsia-500">how it feels</span>. We don\'t just build a site, we create a digital experience for you."',
+                'tr-contact-title': 'Let\'s Bring Your Idea to Life',
+                'tr-contact-desc': 'Having a great website that is modern, fluid, and reflects your brand is easier than you think. Contact us now and let\'s talk about your project.',
+                'tr-btn-contact-main': 'Click Here for Us to Contact You',
+                'tr-wa-text': 'WhatsApp',
+                'tr-email-text': 'Email',
+                'tr-modal-title': 'Let Us Call You',
+                'tr-modal-desc': 'Leave your contact details and we will call you as soon as possible to discuss your project.',
+                'tr-label-name': 'Full Name',
+                'tr-label-phone': 'Phone Number',
+                'tr-label-msg': 'Briefly Your Project (Optional)',
+                'tr-input-name': 'e.g., John Doe',
+                'tr-input-phone': 'Phone Number',
+                'tr-input-msg': 'What kind of website are you dreaming of?',
+                'tr-modal-btn-text': 'Submit & Request a Call',
+                'tr-success-title': 'Request Received!',
+                'tr-success-desc': 'Your details have been successfully received. We will get back to you as soon as possible.',
+                'tr-footer-text': '&copy; 2026 Tasarım Yeri. All rights reserved. Modern & Minimalist Approach.'
+            }
+        };
+
+        function changeLanguage(lang) {
+            document.getElementById('activeLang').innerText = lang;
+            
+            const btnTr = document.getElementById('btn-tr');
+            const btnEn = document.getElementById('btn-en');
+            
+            if(lang === 'TR') {
+                btnTr.className = "text-left px-4 py-2 text-sm font-medium text-white bg-white/5 rounded-lg transition-colors";
+                btnEn.className = "text-left px-4 py-2 text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors mt-1";
+            } else {
+                btnEn.className = "text-left px-4 py-2 text-sm font-medium text-white bg-white/5 rounded-lg transition-colors mt-1";
+                btnTr.className = "text-left px-4 py-2 text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors";
+            }
+
+            const t = translations[lang];
+            for (let id in t) {
+                const element = document.getElementById(id);
+                if (element) {
+                    // Eğer element bir Input veya Textarea ise placeholder'ı (yer tutucu metni) değiştir.
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = t[id];
+                    } else {
+                        // Değilse direkt içeriğini değiştir (HTML etiketlerini korumak için innerHTML kullanılır).
+                        element.innerHTML = t[id];
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
